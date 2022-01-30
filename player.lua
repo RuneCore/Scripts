@@ -32,4 +32,6 @@ function Player:initialized()
     self:send_interface_sub(239, 165, 23, 1)
     self:send_interface_sub(7, 165, 17, 1)
     self:send_interface_sub(593, 165, 10, 1)
+
+    self:update_run_energy(100)
 end
