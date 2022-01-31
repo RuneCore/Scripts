@@ -34,7 +34,8 @@ function Player:initialized()
     self:send_interface_sub(593, 165, 10, 1)
 
     self:update_run_energy(100)
-    self:update_stat(99,3,15000000) -- hitpoints
-    self:update_stat(99,5,15000000) -- prayer
 
+    for i = 0, 22 do
+        self:update_stat(99, i, 13034431)
+    end
 end
