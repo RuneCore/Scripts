@@ -1,6 +1,13 @@
 local command = Command:new("item")
 
 function command:execute(player, args)
+    local function find_item_id_by_name(item_name)
+        local item_names = {}
+        item_names["blue_partyhat"] = 1042
+
+        return item_names[item_name]
+    end
+
     -- get the item as first parameter
     -- this can be a name or an id
     local item = args[1]
@@ -22,7 +29,7 @@ function command:execute(player, args)
 
         -- check if we succeeded in grabbing an item id
         if item_id == nil then
-            player:send_game_message("Failed finding an item with given name: " .. item)
+            player:send_game_message("Unable to find an item with the specified name: " .. item)
             return
         end
     end
@@ -31,13 +38,3 @@ function command:execute(player, args)
     player:send_game_message("Here is your item with id " .. item_id)
     player:give_item(item_id, amount)
 end
-
-
-local function find_item_id_by_name(item_name)
-    local item_id = item_names[item_name]
-
-    return item_id
-end
-
-local item_names = {}
-item_names["blue_partyhat"] = 1042
