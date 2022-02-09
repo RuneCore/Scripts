@@ -1,14 +1,43 @@
 local command = Command:new("item")
 
 function command:execute(player, args)
-    local id = tonumber(args[1]) or nil
-    local amount = tonumber(args[2]) or 1
+    -- get the item as first parameter
+    -- this can be a name or an id
+    local item = args[1]
 
-    if id == nil then
+    -- validate if the first argument was passed
+    if item == nil then
         player:send_game_message("You must specify an item name or id as first argument")
         return
     end
 
-    player:send_game_message("here is your item with id " .. id)
-    player:give_item(id, amount)
+    -- get the second argument which is the item amount; this is optional,
+    -- defaults to 1
+    local amount = tonumber(args[2]) or 1
+
+    local item_id = tonumber(item)
+    -- if the item id is nil, it was a name and should be retrieved
+    if item_id == nil then
+        item_id = find_item_id_by_name(item)
+
+        -- check if we succeeded in grabbing an item id
+        if item_id == nil then
+            player:send_game_message("Failed finding an item with given name: " .. item)
+            return
+        end
+    end
+
+    -- give the player their item
+    player:send_game_message("Here is your item with id " .. item_id)
+    player:give_item(item_id, amount)
 end
+
+
+local function find_item_id_by_name(item_name)
+    local item_id = item_names[item_name]
+
+    return item_id
+end
+
+local item_names = {}
+item_names["blue_partyhat"] = 1042
