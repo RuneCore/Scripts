@@ -38,4 +38,10 @@ function Player:initialized()
     for i = 0, 22 do
         self:update_stat(99, i, 13034431)
     end
+
+    self:weak_queue(
+        function(player)
+            print(player:get_name())
+        end
+    )
 end
