@@ -5,4 +5,5 @@ item.other_cool_lua_variable = "nice"
 
 function item:option1(player)
     print("called option1 on item!!111111")
+    print(self.some_cool_lua_variable)
 end
