@@ -3,6 +3,14 @@ add_item_on_item(
     123,
     function(player, from_item, from_interface, from_slot, to_item, to_interface, to_slot)
         print("itemonitem works")
+
+        print(player:get_name())
+        print(from_item)
+        print(from_interface)
+        print(from_slot)
+        print(to_item)
+        print(to_interface)
+        print(to_slot)
     end
 )
 
