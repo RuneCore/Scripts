@@ -1,3 +1,11 @@
+add_item_on_item(
+    123,
+    123,
+    function(player, from_item, from_interface, from_slot, to_item, to_interface, to_slot)
+        print("itemonitem works")
+    end
+)
+
 local item = Item:new(123)
 
 item.some_cool_lua_variable = 69
