@@ -40,6 +40,7 @@ function Player:initialized()
     end
 
     self:weak_queue(
+        3,
         function(player)
             print(player:get_name())
         end
