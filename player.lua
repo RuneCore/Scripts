@@ -1,5 +1,8 @@
-function Player:initialized()
-    print("Player:initialized")
+INVENTORY = {}
+INVENTORY.INVENTORY = 95
+
+function Player:on_login()
+    print("Player:on_login")
     print("My name is: " .. self:get_name())
 
     --wait(5)
@@ -33,7 +36,10 @@ function Player:initialized()
     self:send_interface_sub(7, 165, 17, 1)
     self:send_interface_sub(593, 165, 10, 1)
 
+    -- TOOD: SIMPLY SEND THIS OVER ENGINE, AT LEAST THE INITIAL STATE
     self:update_run_energy(100)
+
+    self:send_inventory(INVENTORY.INVENTORY, Interface(149,0))
 
     for i = 0, 22 do
         self:update_stat(99, i, 13034431)
