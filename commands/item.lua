@@ -36,5 +36,5 @@ function command:execute(player, args)
 
     -- give the player their item
     player:send_game_message("Here is your item with id " .. item_id)
-    player:give_item(item_id, amount)
+    player:add_inventory_item(INVENTORY.INVENTORY, item_id, amount)
 end
