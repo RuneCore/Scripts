@@ -1,5 +1,5 @@
 INVENTORY = {}
-INVENTORY.INVENTORY = 95
+INVENTORY.INVENTORY = 93
 
 function Player:on_login()
     print("Player:on_login")
@@ -39,7 +39,7 @@ function Player:on_login()
     -- TOOD: SIMPLY SEND THIS OVER ENGINE, AT LEAST THE INITIAL STATE
     self:update_run_energy(100)
 
-    self:send_inventory(INVENTORY.INVENTORY, Interface(149,0))
+    self:send_inventory(INVENTORY.INVENTORY, Interface(149, 0))
 
     for i = 0, 22 do
         self:update_stat(99, i, 13034431)
