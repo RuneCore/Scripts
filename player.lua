@@ -52,3 +52,7 @@ function Player:on_login()
         end
     )
 end
+
+function Player:set_inventory_slot(inv, slot, item, amount)
+    return self:set_inventory_slots(INVENTORY.INVENTORY, {{slot, item, amount}})
+end
