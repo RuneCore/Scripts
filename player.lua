@@ -59,6 +59,12 @@ function Player:set_inventory_slot(inv, slot, item, amount)
 end
 
 function Player:add_inventory_item(inv, item, amount)
+    -- Test for negative amount
+    if amount < 0 then
+        self:send_game_message('Please use "Player:delete_inventory_item(...)" for deleting inventory items instead. ')
+        return false
+    end
+
     -- Grab the size of the inventory
     local inv_size = self:get_inventory_size(inv)
     if inv_size == nil then
@@ -74,10 +80,16 @@ function Player:add_inventory_item(inv, item, amount)
 
         -- If the slot is nil, it means that it is free
         if slot ~= nil then
-            local item_id = slot[1]
-            local item_amount = slot[2]
+            -- Get the slot fields
+            local slot_item_id = slot[1]
+            local slot_item_amount = slot[2]
 
-            if item == item_id then
+            -- If the item ids are equivalent, the stack should possibly be modified (TODO: Test if it is a stackable item)
+            if item == slot_item_id then
+                -- Test for overflow
+                if amount + slot_item_amount <= 2147483647 then
+                    return self:set_inventory_slot(inv, i, item, amount + slot_item_amount)
+                end
             end
         else
             if free_slot == -1 then
