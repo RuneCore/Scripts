@@ -55,5 +55,8 @@ end
 
 -- Set the single inventory slot using the multiple slots engine call
 function Player:set_inventory_slot(inv, slot, item, amount)
-    return self:set_inventory_slots(INVENTORY.INVENTORY, {{slot, item, amount}})
+    return self:set_inventory_slots(inv, {{slot, item, amount}})
+end
+
+function Player:add_inventory_item(inv, item, amount)
 end
