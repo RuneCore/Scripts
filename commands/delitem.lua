@@ -15,5 +15,5 @@ function command:execute(player, args)
 
     local item_id = tonumber(item)
 
-    print(player:delete_inventory_item(INVENTORY.INVENTORY, item_id, amount))
+    player:delete_inventory_item(INVENTORY.INVENTORY, item_id, amount)
 end
