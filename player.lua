@@ -61,7 +61,7 @@ end
 function Player:add_inventory_item(inv, item, amount)
     -- Test for negative amount
     if amount < 0 then
-        self:send_game_message('Please use "Player:delete_inventory_item(...)" for deleting inventory items instead. ')
+        self:send_game_message('Please use "Player:delete_inventory_item(...)" for deleting inventory items. ')
         return false
     end
 
@@ -98,5 +98,11 @@ function Player:add_inventory_item(inv, item, amount)
         end
     end
 
-    print("Found free slot for player at position: " .. free_slot)
+    -- Check whether a free slot was found
+    if free_slot ~= -1 then
+        -- Slot was found, add the item to the inventory
+        return self:set_inventory_slot(inv, free_slot, item, amount)
+    else
+        -- TODO: Drop the item to the ground
+    end
 end
