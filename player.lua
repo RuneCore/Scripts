@@ -59,4 +59,32 @@ function Player:set_inventory_slot(inv, slot, item, amount)
 end
 
 function Player:add_inventory_item(inv, item, amount)
+    -- Grab the size of the inventory
+    local inv_size = self:get_inventory_size(inv)
+    if inv_size == nil then
+        return
+    end
+
+    -- Create a variable for storing a free slot
+    local free_slot = -1
+
+    -- Iterate over the inventory's slots
+    for i = 0, inv_size - 1 do
+        local slot = self:get_inventory_slot(inv, i)
+
+        -- If the slot is nil, it means that it is free
+        if slot ~= nil then
+            local item_id = slot[1]
+            local item_amount = slot[2]
+
+            if item == item_id then
+            end
+        else
+            if free_slot == -1 then
+                free_slot = i
+            end
+        end
+    end
+
+    print("Found free slot for player at position: " .. free_slot)
 end
