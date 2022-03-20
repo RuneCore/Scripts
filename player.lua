@@ -61,7 +61,7 @@ end
 function Player:add_inventory_item(inv, item, amount)
     -- Test for negative amount
     if amount < 0 then
-        self:send_game_message('Please use "Player:delete_inventory_item(...)" for deleting inventory items. ')
+        self:send_game_message('Please use "Player:delete_inventory_item(...)" for deleting inventory items.')
         return false
     end
 
@@ -105,4 +105,44 @@ function Player:add_inventory_item(inv, item, amount)
     else
         -- TODO: Drop the item to the ground
     end
+end
+
+function Player:delete_inventory_item(inv, item, amount)
+    -- Test for negative amount
+    if amount < 0 then
+        self:send_game_message("Negative amounts should not be specified here.")
+        return false
+    end
+
+    -- Grab the size of the inventory
+    local inv_size = self:get_inventory_size(inv)
+    if inv_size == nil then
+        return false
+    end
+
+    -- Iterate over the inventory's slots
+    for i = 0, inv_size - 1 do
+        local slot = self:get_inventory_slot(inv, i)
+
+        -- If the slot is nil, it means that it is free
+        if slot ~= nil then
+            -- Get the slot fields
+            local slot_item_id = slot[1]
+            local slot_item_amount = slot[2]
+
+            -- Test for item
+            if item == slot_item_id then
+                local new_amount = slot_item_amount - amount
+
+                -- If the new amount greater than 0, set it on the slot. Else remove the item
+                if new_amount > 0 then
+                    return self:set_inventory_slot(inv, i, item, new_amount)
+                else
+                    return self:set_inventory_slot(inv, i, -1, 0)
+                end
+            end
+        end
+    end
+
+    return 10.5
 end
