@@ -1,5 +1,5 @@
-local interface = Interface:new(378)
-local button_play = interface:new_button(78)
+INTERFACES.WELCOME_SCREEN = Interface:new(378)
+local button_play = INTERFACES.WELCOME_SCREEN:new_button(78)
 
 function button_play.option_1(player)
     player:send_interface_top(548)
