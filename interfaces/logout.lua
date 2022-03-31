@@ -1,5 +1,4 @@
 INTERFACES.LOGOUT = Interface:new(182)
-INTERFACES.LOGOUT.inventory = 93
 
 local button_logout = INTERFACES.LOGOUT:new_button(8)
 local button_world_switch = INTERFACES.LOGOUT:new_button(3)

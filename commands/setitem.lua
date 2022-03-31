@@ -5,5 +5,5 @@ function command:execute(player, args)
     local item = tonumber(args[2])
     local amount = tonumber(args[3])
 
-    player:set_inventory_slot(INVENTORY.INVENTORY, slot, item, amount)
+    player:set_inventory_slot(INTERFACES.PLAYER_INVENTORY, slot, item, amount)
 end

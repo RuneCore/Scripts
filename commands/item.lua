@@ -34,7 +34,7 @@ function command:execute(player, args)
     end
 
     -- Give the player their item
-    if (player:add_inventory_item(INVENTORY.INVENTORY, item_id, amount)) then
+    if (player:add_inventory_item(INTERFACES.PLAYER_INVENTORY, item_id, amount)) then
         player:send_game_message("Succesfully added item with id " .. item_id .. " to your inventory. ")
     else
         player:send_game_message("Failed adding item with id " .. item_id .. " to your inventory. ")
