@@ -164,3 +164,18 @@ function Player:delete_inventory_item(interface, item, amount)
 
     return false
 end
+
+function Player:chat(emote, text)
+    --[[
+    val dialogueBox = UserInterface(217) -- user interface 217
+    runClientScript(2379) -- run client script 2379
+    openModal(dialogueBox, CHAT_BOX_COMPONENT) -- if_open_sub chat box component
+    setComponentPlayer(dialogueBox.child(1)) -- IfSetPlayerHead
+    setComponentAnim(dialogueBox.child(1), animation) -- IfSetAnim
+    setComponentText(dialogueBox.child(2), title) -- IfSetText
+    setComponentText(dialogueBox.child(4), text) -- IfSetText
+    runClientScript(600, 1, 1, leading, (dialogueBox.id shl 16) or 4)  -- run client script here
+    setComponentEventsAll(dialogueBox.child(3), InterfaceEvent.PAUSE) -- IfSetEvents(All)
+    setComponentText(dialogueBox.child(3), pauseText) -- IfSetText
+    ]]
+end

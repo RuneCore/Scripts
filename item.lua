@@ -34,4 +34,6 @@ function item:option1(player, interface, slot)
     if slot == 8 then
         print("slot issss " .. slot)
     end
+
+    player:chat(123, "Testy")
 end
