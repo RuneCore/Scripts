@@ -10,7 +10,7 @@ function command:execute(player, args)
     end
 
     -- get the item from the inventory slot
-    local item = player:get_inventory_slot(INTERFACES.PLAYER_INVENTORY, item_slot)
+    local item = player:get_inventory_slot(INVENTORY.INVENTORY, item_slot)
     if item == nil then
         player:send_game_message("Item in slot " .. item_slot .. " was not found")
         return

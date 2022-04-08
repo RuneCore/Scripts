@@ -39,9 +39,9 @@ function Player:on_login()
     -- TOOD: SIMPLY SEND THIS OVER ENGINE, AT LEAST THE INITIAL STATE
     self:update_run_energy(100)
 
-    self:send_inventory(INTERFACES.PLAYER_INVENTORY)
+    self:send_inventory(INVENTORY.INVENTORY)
 
-    self:add_inventory_item(INTERFACES.PLAYER_INVENTORY, 995, 1000000)
+    self:add_inventory_item(INVENTORY.INVENTORY, 995, 1000000)
 
     for i = 0, 22 do
         self:update_stat(99, i, 13034431)
@@ -56,25 +56,19 @@ function Player:on_login()
 end
 
 -- Set the single inventory slot using the multiple slots engine call
-function Player:set_inventory_slot(interface, slot, item, amount)
-    return self:set_inventory_slots(interface, {{slot, item, amount}})
+function Player:set_inventory_slot(inventory, slot, item, amount)
+    return self:set_inventory_slots(inventory, {{slot, item, amount}})
 end
 
-function Player:add_inventory_item(interface, item, amount)
+function Player:add_inventory_item(inventory, item, amount)
     -- Test for negative amount
     if amount < 0 then
         self:send_game_message('Please use "Player:delete_inventory_item(...)" for deleting inventory items.')
         return false
     end
 
-    -- Test if the interface has an inventory
-    if interface.inventory == nil then
-        print("Inventory with id TODO does not have an inventory associated with it.")
-        return false
-    end
-
-    -- Grab the size of the interface's inventory
-    local inv_size = self:get_inventory_size(interface.inventory)
+    -- Grab the size of the inventory's inventory
+    local inv_size = self:get_inventory_size(inventory)
     if inv_size == nil then
         return
     end
@@ -84,7 +78,7 @@ function Player:add_inventory_item(interface, item, amount)
 
     -- Iterate over the inventory's slots
     for i = 0, inv_size - 1 do
-        local slot = self:get_inventory_slot(interface, i)
+        local slot = self:get_inventory_slot(inventory, i)
 
         -- If the slot is nil, it means that it is free
         if slot ~= nil then
@@ -96,7 +90,7 @@ function Player:add_inventory_item(interface, item, amount)
             if item == slot_item_id then
                 -- Test for overflow
                 if amount + slot_item_amount <= 2147483647 then
-                    return self:set_inventory_slot(interface, i, item, amount + slot_item_amount)
+                    return self:set_inventory_slot(inventory, i, item, amount + slot_item_amount)
                 end
             elseif slot_item_id == -1 then
                 if free_slot == -1 then
@@ -113,34 +107,28 @@ function Player:add_inventory_item(interface, item, amount)
     -- Check whether a free slot was found
     if free_slot ~= -1 then
         -- Slot was found, add the item to the inventory
-        return self:set_inventory_slot(interface, free_slot, item, amount)
+        return self:set_inventory_slot(inventory, free_slot, item, amount)
     else
         -- TODO: Drop the item to the ground
     end
 end
 
-function Player:delete_inventory_item(interface, item, amount)
+function Player:delete_inventory_item(inventory, item, amount)
     -- Test for negative amount
     if amount < 0 then
         self:send_game_message("Negative amounts should not be specified here.")
         return false
     end
 
-    -- Test if the interface has an inventory
-    if interface.inventory == nil then
-        print("Inventory with id TODO does not have an inventory associated with it.")
-        return false
-    end
-
-    -- Grab the size of the interface's inventory
-    local inv_size = self:get_inventory_size(interface.inventory)
+    -- Grab the size of the inventory's inventory
+    local inv_size = self:get_inventory_size(inventory)
     if inv_size == nil then
         return false
     end
 
     -- Iterate over the inventory's slots
     for i = 0, inv_size - 1 do
-        local slot = self:get_inventory_slot(interface, i)
+        local slot = self:get_inventory_slot(inventory, i)
 
         -- If the slot is nil, it means that it is free
         if slot ~= nil then
@@ -154,9 +142,9 @@ function Player:delete_inventory_item(interface, item, amount)
 
                 -- If the new amount greater than 0, set it on the slot. Else remove the item
                 if new_amount > 0 then
-                    return self:set_inventory_slot(interface, i, item, new_amount)
+                    return self:set_inventory_slot(inventory, i, item, new_amount)
                 else
-                    return self:set_inventory_slot(interface, i, -1, 0)
+                    return self:set_inventory_slot(inventory, i, -1, 0)
                 end
             end
         end
