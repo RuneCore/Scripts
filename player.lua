@@ -44,7 +44,7 @@ function Player:on_login()
     self:add_inventory_item(INVENTORY.INVENTORY, 995, 1000000)
 
     for i = 0, 22 do
-        self:update_stat(99, i, 13034431)
+        self:update_stat(i, 99, 13034431)
     end
 
     self:weak_queue(
