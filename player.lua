@@ -37,11 +37,11 @@ function Player:on_login()
     self:send_interface_sub(593, 165, 10, 1)
 
     self:run_clientscript(
-        233,
+        CLIENTSCRIPTS.LOGIN_SCREEN_ANIMATION_INIT_233,
         -1, 2100, 0, 1897, 330, -200, 5, 28238, 24772664
     ) -- cake
     self:run_clientscript(
-        233,
+        CLIENTSCRIPTS.LOGIN_SCREEN_ANIMATION_INIT_233,
         8446, 1200, 0, 177, 1999, 0, 0, 38593, 24772665
     ) -- npc head
 
