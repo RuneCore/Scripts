@@ -163,6 +163,8 @@ function Player:delete_inventory_item(inventory, item, amount)
 end
 
 function Player:chat(emote, text)
+    self:send_interface_sub(209, 165, 1, 1)
+
     --[[
     val dialogueBox = UserInterface(217) -- user interface 217
     runClientScript(2379) -- run client script 2379
