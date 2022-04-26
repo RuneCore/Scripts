@@ -163,6 +163,8 @@ function Player:delete_inventory_item(inventory, item, amount)
 end
 
 function Player:chat(emote, text)
+
+    self:run_clientscript(2379)
     self:send_interface_sub(209, 165, 1, 1)
 
     --[[
